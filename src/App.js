@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+import User from './Components/User'
+import Login from './Components/Login'
+import Registration from './Components/Reg'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    user: null
+  }
+  storageUser=(user)=>{
+    this.setState({user:user})
+  }
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/login/">sign in</Link>
+                </li>
+                <li>
+                  <Link to="/registration/">registration</Link>
+                </li>
+              </ul>
+            </nav>
+            <Route path="/" exact
+              component={() => <User state={this.state.user} storeUser={this.storageUser} />} />
+            <Route path="/login/" exact component={() => <Login state={this.state.user} storeUser={this.storageUser} />}  />
+            <Route path="/registration/" exact component={Registration} />
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
