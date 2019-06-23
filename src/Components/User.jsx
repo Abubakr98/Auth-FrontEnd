@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import './User.css';
 import { _updateLocalStorage } from './Login';
+import URL from '../config/config';
 
 class User extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class User extends React.Component {
     const options = {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + user.accessToken },
-      url: 'http://localhost:3000/user/' + user.userId,
+      url: URL.url+'user/' + user.userId,
     };
     axios(options)
       .then((response) => {
@@ -31,7 +32,7 @@ class User extends React.Component {
     let data = JSON.stringify({
       "refreshToken": user.refreshToken
     });
-    fetch('http://localhost:3000/refresh-tokens', {
+    fetch(URL.url+'refresh-tokens', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: data,

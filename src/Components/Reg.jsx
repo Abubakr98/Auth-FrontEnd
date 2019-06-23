@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import './Login.css';
+import URL from '../config/config';
 
 const Reg = props => {
   const [state, setState] = useState({
@@ -22,7 +23,7 @@ const Reg = props => {
   const sendData = e => {
     e.preventDefault();
    if (state.password === state.password2) {    
-    axios.post('http://localhost:3000/registration', {email:state.email,password:state.password})
+    axios.post(URL.url+'registration', {email:state.email,password:state.password})
       .then((response) => {
         if (response.data.hasOwnProperty('message')) {
           alert(response.data.message);

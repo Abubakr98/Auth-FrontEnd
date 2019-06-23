@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { withRouter } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
+import URL from '../config/config';
 
 const _updateLocalStorage = (data) => { // Saving user data in localStorege
   let user = JSON.stringify(data);
@@ -24,7 +25,7 @@ const Login = props => {
   }
   const sendData = e => {
     e.preventDefault();
-    axios.post('http://localhost:3000/signin', state)
+    axios.post(URL.url+'signin', state)
       .then((response) => {
         if (response.data.hasOwnProperty('message')) {
           alert(response.data.message);
